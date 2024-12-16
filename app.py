@@ -1,5 +1,5 @@
 from flask import Flask
-import requests, subprocess
+import subprocess
 
 app = Flask(__name__)
 
