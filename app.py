@@ -1,23 +1,20 @@
 from flask import Flask
-import threading, time, subprocess
+import threading, time, subprocess, requests
 
 app = Flask(__name__)
 
-def infinite_thread():
-    while True:
-        subprocess.run("python gitpod.py", shell=True)
-        time.sleep(5)
-        pass
-
-@app.route('/gitpod')
-def gitpod_route():
-    thread = threading.Thread(target=infinite_thread)
-    thread.daemon = True
-    thread.start()
-    return "Uptime Active"
+def run_gitpod():
+    subprocess.run("python gitpod.py", shell=True)
+    time.sleep(30)
+    requests.get("https://uptime-chi.vercel.app/gitpod")
 
 @app.route('/')
 def home():
+    return "Miyan"
+
+@app.route('/gitpod')
+def gitpod():
+    run_gitpod()
     return "Miyan"
 
 if __name__ == "__main__":
