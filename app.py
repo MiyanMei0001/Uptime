@@ -9,8 +9,8 @@ def home():
 
 @app.route('/gitpod')
 def gitpod():
-    from gitpod import response
-    return f"{response.text}", 200
+    result = subprocess.check_output("python gitpod.py", shell=True, text=True)
+    return result, 200
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
